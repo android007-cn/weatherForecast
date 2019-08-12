@@ -15,6 +15,7 @@ class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = dataList[position]
         holder.itemView.dayNameTv.text = data.day
+        holder.itemView.highLowTemperatureTv.text = "${data.tem1} / ${data.tem2}"
         holder.itemView.setOnClickListener { onItemClick(data) }
     }
 
