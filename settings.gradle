@@ -1,1 +1,1 @@
-include ':app-db', ':app-retrofit-nopaging', ':app-retrofit-paging'
+include ':app'
