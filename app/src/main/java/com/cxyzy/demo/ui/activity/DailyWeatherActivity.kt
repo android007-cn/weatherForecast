@@ -3,16 +3,16 @@ package com.cxyzy.demo.ui.activity
 import android.view.View
 import androidx.lifecycle.Observer
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.response.RepoResp
-import com.cxyzy.demo.ui.adapter.RepoAdapter
-import com.cxyzy.demo.viewmodels.RepoViewModel
+import com.cxyzy.demo.network.response.DailyWeatherResp
+import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
+import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_repo.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class RepoActivity : BaseActivity<RepoViewModel>() {
-    private val adapter = RepoAdapter()
-    override fun viewModel(): RepoViewModel = getViewModel()
+class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
+    private val adapter = DailyWeatherAdapter()
+    override fun viewModel(): DailyWeatherViewModel = getViewModel()
 
     override fun layoutId(): Int = R.layout.activity_repo
 
@@ -23,7 +23,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
-        viewModel().getRepo(
+        viewModel().getWeather(
                 {
                     progressBar.visibility = View.VISIBLE
                 },
@@ -32,15 +32,15 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                 },
                 {
                     progressBar.visibility = View.GONE
-                    viewModel().repoList.observe(this, Observer {
+                    viewModel().weatherList.observe(this, Observer {
                         adapter.dataList.addAll(it)
                         adapter.notifyDataSetChanged()
                     })
                 })
     }
 
-    private fun onItemClick(repo: RepoResp) {
-        viewModel().getRepoDetail(repo.id,
+    private fun onItemClick(resp: DailyWeatherResp.Data) {
+        viewModel().getRepoDetail(resp.day,
                 {
                     progressBar.visibility = View.VISIBLE
                 },

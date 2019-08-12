@@ -5,27 +5,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.response.RepoResp
-import kotlinx.android.synthetic.main.item_repo.view.*
+import com.cxyzy.demo.network.response.DailyWeatherResp
+import kotlinx.android.synthetic.main.item_daily_forecast.view.*
 
-class RepoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var onItemClick: (Repo: RepoResp) -> Unit
-    var dataList = mutableListOf<RepoResp>()
+class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
+    var dataList = mutableListOf<DailyWeatherResp.Data>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = dataList[position]
-        holder.itemView.textView.text = data.fullName
+        holder.itemView.dayNameTv.text = data.day
         holder.itemView.setOnClickListener { onItemClick(data) }
     }
 
     override fun getItemCount(): Int = dataList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repo, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_daily_forecast, parent, false)
         return ViewHolder(view)
     }
 
-    infix fun setOnItemClick(onClick: (Repo: RepoResp) -> Unit) {
+    infix fun setOnItemClick(onClick: (resp: DailyWeatherResp.Data) -> Unit) {
         this.onItemClick = onClick
     }
 

@@ -3,17 +3,17 @@ package com.cxyzy.demo.viewmodels
 import androidx.lifecycle.MutableLiveData
 import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
-import com.cxyzy.demo.network.response.RepoResp
+import com.cxyzy.demo.network.response.DailyWeatherResp
 
-class RepoViewModel : BaseViewModel() {
+class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
-    var repoList: MutableLiveData<List<RepoResp>> = MutableLiveData()
+    var weatherList: MutableLiveData<List<DailyWeatherResp.Data>> = MutableLiveData()
 
     fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    //TODO: get RepoResp detail
+                    //TODO: get DailyWeatherResp detail
                 },
                 {
                     catchBlock(it)
@@ -28,11 +28,11 @@ class RepoViewModel : BaseViewModel() {
      * @param catchBlock 异常处理代码块
      * @param finallyBlock 无论是否异常都执行的代码块
      */
-    fun getRepo(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getWeather(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    repoList.value = httpRepository.getRepo()
+                    weatherList.value = httpRepository.getDailyWeather().dataList
                 },
                 {
                     catchBlock(it)
