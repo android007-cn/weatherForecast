@@ -7,14 +7,14 @@ import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import com.cxyzy.utils.ext.toast
-import kotlinx.android.synthetic.main.activity_repo.*
+import kotlinx.android.synthetic.main.activity_weather.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
-    private val adapter = DailyWeatherAdapter()
+    private val adapter = DailyWeatherAdapter(this)
     override fun viewModel(): DailyWeatherViewModel = getViewModel()
 
-    override fun layoutId(): Int = R.layout.activity_repo
+    override fun layoutId(): Int = R.layout.activity_weather
 
     override fun initViews() {
         rv.adapter = adapter
@@ -40,7 +40,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     }
 
     private fun onItemClick(resp: DailyWeatherResp.Data) {
-        viewModel().getRepoDetail(resp.day,
+        viewModel().getWeatherDetail(resp.day,
                 {
                     progressBar.visibility = View.VISIBLE
                 },

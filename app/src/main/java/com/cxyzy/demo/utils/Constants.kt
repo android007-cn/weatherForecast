@@ -11,3 +11,11 @@ object OkHttpUrl {
     const val BASE_URL = "https://www.tianqiapi.com/api/"
     const val LOGIN_URL = "user/login"
 }
+
+object WeatherTypes {
+//    xue, lei, shachen, wu, bingbao, yun, yu, yin, qing
+    const val SUNNY = "qing"
+    const val CLOUDY = "yun"
+    const val RAINY = "yu"
+    const val LOGIN_URL = "user/login"
+}

@@ -9,7 +9,7 @@ class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
     var weatherList: MutableLiveData<List<DailyWeatherResp.Data>> = MutableLiveData()
 
-    fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getWeatherDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
                     tryBlock()

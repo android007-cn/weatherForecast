@@ -1,14 +1,19 @@
 package com.cxyzy.demo.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.DailyWeatherResp
+import com.cxyzy.demo.utils.WeatherTypes.CLOUDY
+import com.cxyzy.demo.utils.WeatherTypes.RAINY
+import com.cxyzy.demo.utils.WeatherTypes.SUNNY
 import kotlinx.android.synthetic.main.item_daily_forecast.view.*
 
-class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DailyWeatherAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var mContext: Context = context
     private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
     var dataList = mutableListOf<DailyWeatherResp.Data>()
 
@@ -16,7 +21,17 @@ class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val data = dataList[position]
         holder.itemView.dayNameTv.text = data.day
         holder.itemView.highLowTemperatureTv.text = "${data.tem1} / ${data.tem2}"
+        holder.itemView.weatherLogoIv.setImageResource(getWeatherLogo(data.weaImg))
         holder.itemView.setOnClickListener { onItemClick(data) }
+    }
+
+    private fun getWeatherLogo(weaImg: String): Int {
+        return when {
+            SUNNY == weaImg -> R.mipmap.sunny
+            CLOUDY == weaImg -> R.mipmap.cloudy
+            RAINY == weaImg -> R.mipmap.rainy
+            else -> R.mipmap.rainy
+        }
     }
 
     override fun getItemCount(): Int = dataList.size
