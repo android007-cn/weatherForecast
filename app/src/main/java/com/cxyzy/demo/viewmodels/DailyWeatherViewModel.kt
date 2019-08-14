@@ -28,11 +28,11 @@ class DailyWeatherViewModel : BaseViewModel() {
      * @param catchBlock 异常处理代码块
      * @param finallyBlock 无论是否异常都执行的代码块
      */
-    fun getWeather(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getWeather(cityName: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    weatherList.value = httpRepository.getDailyWeather().dataList
+                    weatherList.value = httpRepository.getDailyWeather(cityName).dataList
                 },
                 {
                     catchBlock(it)

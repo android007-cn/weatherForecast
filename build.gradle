@@ -33,14 +33,11 @@ buildscript {
         okhttpVersion = '3.9.1'
         loggingInterceptorVersion = '3.11.0'
         koinVersion = '2.0.0-rc-1'
-        kotlinUtilsVersion = '1.0.9'
+        kotlinUtilsVersion = '1.0.10'
         eventBusVersion = '3.1.1'
+        assentVersion = '2.3.1'
     }
     repositories {
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
-//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
-//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
         google()
         jcenter()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
@@ -59,8 +56,4 @@ allprojects {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'https://jitpack.io' }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
