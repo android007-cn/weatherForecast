@@ -1,6 +1,8 @@
 package com.cxyzy.demo.ui.activity
 
 import android.text.TextUtils
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
@@ -32,6 +34,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
         initAdapter()
         initSwipeRefreshLayout()
         locateAndFetchWeatherRequirePermission(true)
+        setSupportActionBar(toolbar)
     }
 
     private fun initSwipeRefreshLayout() {
@@ -103,6 +106,19 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
                 {
                     progressBar.visibility = GONE
                 })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_scrolling, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_edit_cities -> true
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
