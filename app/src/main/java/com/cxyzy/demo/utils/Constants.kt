@@ -19,3 +19,10 @@ object WeatherTypes {
     const val RAINY = "yu"
     const val LOGIN_URL = "user/login"
 }
+
+
+object SpConst {
+    const val DEFAULT_SP_FILE = "DEFAULT_SP_FILE"
+    const val CURRENT_LOCATION_CITY_NAME = "CURRENT_LOCATION_CITY_NAME"
+}
+
