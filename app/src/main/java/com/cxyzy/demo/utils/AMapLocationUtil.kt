@@ -34,7 +34,6 @@ object AMapLocationUtil {
         //声明定位回调监听器
         val locationListener = AMapLocationListener { location ->
             if (null != location) {
-                SpUtil.saveSp(SpConst.CURRENT_LOCATION_CITY_NAME, location.city)
                 val myLocation = MyLocation(location.longitude, location.latitude, location.city)
                 callback.onLocateSuccess(myLocation)
                 location.latitude
