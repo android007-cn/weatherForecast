@@ -15,6 +15,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         observeVM()
         prepareBeforeInitView()
         setToolbar()
+        initData()
         initViews()
         initListeners()
         startObserve()
@@ -22,6 +23,8 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
             EventBus.getDefault().register(this)
         }
     }
+
+    abstract fun initData()
 
     private fun setToolbar() {
         providerToolBar()?.let { setSupportActionBar(it) }
