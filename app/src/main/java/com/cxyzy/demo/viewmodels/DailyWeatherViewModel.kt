@@ -10,7 +10,6 @@ class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
     private lateinit var mLocationList: List<String>
     var locationMap = TreeMap<String, MutableLiveData<List<DailyWeatherResp.Data>>>()
-//    var weatherList: MutableLiveData<List<DailyWeatherResp.Data>> = MutableLiveData()
 
     fun getWeatherDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
@@ -33,8 +32,6 @@ class DailyWeatherViewModel : BaseViewModel() {
         }
     }
 
-    fun getLocationList() = mLocationList
-
     /**
      * @param tryBlock 主要执行代码块
      * @param catchBlock 异常处理代码块
@@ -54,4 +51,7 @@ class DailyWeatherViewModel : BaseViewModel() {
                 true)
 
     }
+
+    fun getLocationList() = mLocationList
+    fun getLocation(index: Int) = mLocationList[index]
 }

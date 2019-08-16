@@ -18,7 +18,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     override fun layoutId(): Int = R.layout.activity_weather
 
     override fun initData() {
-        viewModel().initLocations(listOf("北京", "南京","赤峰"))
+        viewModel().initLocations(listOf("北京", "南京","赤峰","天津"))
     }
 
     override fun initViews() {
