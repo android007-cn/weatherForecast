@@ -37,10 +37,10 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     }
 
     private fun initSwipeRefreshLayout() {
-//        swipeRefreshLayout.setOnRefreshListener {
-//            swipeRefreshLayout.isRefreshing = false
-//            locateAndFetchWeatherRequirePermission(false)
-//        }
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            locateAndFetchWeatherRequirePermission(false)
+        }
     }
 
     private fun initViewPagerView() {
