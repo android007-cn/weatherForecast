@@ -51,4 +51,6 @@ dependencies {
 
     implementation "com.afollestad:assent:$rootProject.assentVersion"
     implementation 'com.amap.api:location:latest.integration'
+
+    implementation 'com.afollestad:viewpagerdots:1.0.0'
 }

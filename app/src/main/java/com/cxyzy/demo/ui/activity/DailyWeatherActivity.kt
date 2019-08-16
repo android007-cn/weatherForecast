@@ -10,7 +10,6 @@ import com.afollestad.assent.Permission
 import com.afollestad.assent.runWithPermissions
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.DailyWeatherResp
-import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
 import com.cxyzy.demo.utils.AMapLocationUtil
 import com.cxyzy.demo.utils.Callback
 import com.cxyzy.demo.utils.MyLocation
@@ -25,28 +24,28 @@ import org.koin.android.viewmodel.ext.android.getViewModel
 
 class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
 
-    private val adapter = DailyWeatherAdapter(this)
+
     override fun viewModel(): DailyWeatherViewModel = getViewModel()
 
     override fun layoutId(): Int = R.layout.activity_weather
 
     override fun initViews() {
-        initAdapter()
+        initViewPagerView()
         initSwipeRefreshLayout()
         locateAndFetchWeatherRequirePermission(true)
         setSupportActionBar(toolbar)
     }
 
     private fun initSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing = false
-            locateAndFetchWeatherRequirePermission(false)
-        }
+//        swipeRefreshLayout.setOnRefreshListener {
+//            swipeRefreshLayout.isRefreshing = false
+//            locateAndFetchWeatherRequirePermission(false)
+//        }
     }
 
-    private fun initAdapter() {
-        rv.adapter = adapter
-        adapter.setOnItemClick(this::onItemClick)
+    private fun initViewPagerView() {
+        viewPagerView.initViews(this)
+        dotsIndicator.attachViewPager(viewPagerView.getViewPager())
     }
 
     private fun fetchWeather(cityName: String) {
@@ -58,9 +57,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
                 finallyBlock = {
                     progressBar.visibility = GONE
                     viewModel().weatherList.observe(this, Observer {
-                        adapter.dataList.clear()
-                        adapter.dataList.addAll(it)
-                        adapter.notifyDataSetChanged()
+                        viewPagerView.setData(it)
                     })
                 })
     }
