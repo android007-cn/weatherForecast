@@ -1,5 +1,8 @@
 package com.cxyzy.demo.utils
 
+
+const val CURRENT_LOCATION = "CURRENT_LOCATION"
+
 object ApiToken {
     const val APP_ID = "14374683"
     const val APP_SECRET = "DcE8CL8i"

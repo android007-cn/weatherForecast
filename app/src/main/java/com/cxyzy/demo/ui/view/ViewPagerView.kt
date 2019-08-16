@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.cxyzy.demo.R
-import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
+import com.cxyzy.demo.ui.adapter.DailyWeatherAdapterFactory
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.view_pager_view.view.*
 
@@ -27,9 +27,10 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
                 val inflater = LayoutInflater.from(activity)
                 val rootView = inflater.inflate(R.layout.vp_weather, container, false) as ViewGroup
                 val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
-                val adapter = DailyWeatherAdapter(activity, getLocation(viewModel, position), viewModel)
+                val locationName = getLocationName(viewModel, position)
+                val adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationName, activity, viewModel)
                 recyclerView.adapter = adapter
-                adapter.getWeather()
+                adapter.queryWeather()
                 container.addView(rootView)
                 return rootView
             }
@@ -43,7 +44,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
             }
 
             override fun getPageTitle(position: Int): CharSequence? {
-                return getLocation(viewModel, position)
+                return getLocationName(viewModel, position)
             }
 
             override fun getCount(): Int {
@@ -56,7 +57,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         }
     }
 
-    private fun getLocation(viewModel: DailyWeatherViewModel, position: Int) =
+    private fun getLocationName(viewModel: DailyWeatherViewModel, position: Int) =
             viewModel.getLocation(position)
 
     fun getViewPager(): ViewPager = viewPager

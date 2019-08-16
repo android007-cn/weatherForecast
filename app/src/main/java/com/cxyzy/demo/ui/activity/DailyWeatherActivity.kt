@@ -7,6 +7,7 @@ import android.view.View.VISIBLE
 import androidx.appcompat.widget.Toolbar
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.DailyWeatherResp
+import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_weather.*
@@ -18,7 +19,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     override fun layoutId(): Int = R.layout.activity_weather
 
     override fun initData() {
-        viewModel().initLocations(listOf("北京", "南京","赤峰","天津"))
+        viewModel().initLocations(listOf(CURRENT_LOCATION, "南京", "赤峰", "天津"))
     }
 
     override fun initViews() {
@@ -36,7 +37,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     }
 
     private fun initViewPagerView() {
-        viewPagerView.initViews(this,viewModel())
+        viewPagerView.initViews(this, viewModel())
         dotsIndicator.attachViewPager(viewPagerView.getViewPager())
     }
 
