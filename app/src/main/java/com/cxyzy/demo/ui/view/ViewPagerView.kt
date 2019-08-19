@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.cxyzy.demo.R
-import com.cxyzy.demo.ui.adapter.DailyWeatherAdapterFactory
+import com.cxyzy.demo.ui.rvAdapter.DailyWeatherAdapterFactory
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.view_pager_view.view.*
 

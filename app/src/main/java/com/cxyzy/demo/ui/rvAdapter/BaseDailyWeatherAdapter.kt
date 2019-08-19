@@ -1,4 +1,4 @@
-package com.cxyzy.demo.ui.adapter
+package com.cxyzy.demo.ui.rvAdapter
 
 import android.view.LayoutInflater
 import android.view.View

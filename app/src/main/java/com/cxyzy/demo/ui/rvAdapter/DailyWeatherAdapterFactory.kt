@@ -1,4 +1,4 @@
-package com.cxyzy.demo.ui.adapter
+package com.cxyzy.demo.ui.rvAdapter
 
 import androidx.appcompat.app.AppCompatActivity
 import com.cxyzy.demo.utils.CURRENT_LOCATION
