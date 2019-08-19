@@ -29,15 +29,14 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
                 val rootView = inflater.inflate(R.layout.vp_weather, container, false) as ViewGroup
                 val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
                 val locationId = getLocationId(viewModel, position)
-                locationId.let {
-                    val adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationId)
-                    adapter.activity = activity
-                    adapter.viewModel = viewModel
-                    adapter.loadIndicator = loadIndicator
-                    recyclerView.adapter = adapter
-                    adapter.queryWeather()
-                    container.addView(rootView)
+
+                recyclerView.adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationId).also {
+                    it.activity = activity
+                    it.viewModel = viewModel
+                    it.loadIndicator = loadIndicator
+                    it.queryWeather()
                 }
+                container.addView(rootView)
                 return rootView
             }
 
