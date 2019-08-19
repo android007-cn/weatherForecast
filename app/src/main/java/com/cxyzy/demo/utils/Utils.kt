@@ -1,11 +1,7 @@
 package com.cxyzy.demo.utils
 
 import android.content.Context
-import android.location.LocationManager
 import androidx.appcompat.app.AlertDialog
-import com.amap.api.location.AMapLocation
-import java.text.SimpleDateFormat
-import java.util.*
 
 object Utils {
 

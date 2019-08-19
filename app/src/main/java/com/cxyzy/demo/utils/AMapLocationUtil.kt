@@ -45,7 +45,7 @@ object AMapLocationUtil {
         mLocationClient.setLocationListener(locationListener)
 
         //给定位客户端对象设置定位参数
-        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.setLocationOption(mLocationOption)
         //启动定位
         mLocationClient.startLocation()
     }

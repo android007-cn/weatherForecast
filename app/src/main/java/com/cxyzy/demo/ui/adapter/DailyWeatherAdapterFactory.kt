@@ -5,11 +5,11 @@ import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 
 object DailyWeatherAdapterFactory {
-    fun getDailyWeatherAdapter(locationName: String, activity: AppCompatActivity, viewModel: DailyWeatherViewModel): BaseDailyWeatherAdapter {
-        return if (CURRENT_LOCATION == locationName) {
-            CurrentLocationDailyWeatherAdapter(activity, viewModel,locationName)
+    fun getDailyWeatherAdapter(locationId: String, activity: AppCompatActivity, viewModel: DailyWeatherViewModel): BaseDailyWeatherAdapter {
+        return if (CURRENT_LOCATION == locationId) {
+            CurrentLocationDailyWeatherAdapter(activity, viewModel, locationId)
         } else {
-            BaseDailyWeatherAdapter(activity, viewModel,locationName)
+            BaseDailyWeatherAdapter(activity, viewModel, locationId)
         }
     }
 }

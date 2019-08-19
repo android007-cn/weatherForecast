@@ -1,15 +1,11 @@
 package com.cxyzy.demo.viewmodels
 
-import androidx.lifecycle.MutableLiveData
 import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
-import com.cxyzy.demo.network.response.DailyWeatherResp
-import java.util.*
 
 class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
-    private lateinit var mLocationList: List<String>
-    var locationMap = TreeMap<String, MutableLiveData<List<DailyWeatherResp.Data>>>()
+    var cachedLocationWeatherList = ArrayList<LocationWeather>()
 
     fun getWeatherDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
@@ -26,9 +22,8 @@ class DailyWeatherViewModel : BaseViewModel() {
     }
 
     fun initLocations(locationList: List<String>) {
-        mLocationList = locationList
         for (location in locationList) {
-            locationMap[location] = MutableLiveData()
+            cachedLocationWeatherList.add(LocationWeather(id = location, locationName = location))
         }
     }
 
@@ -37,11 +32,14 @@ class DailyWeatherViewModel : BaseViewModel() {
      * @param catchBlock 异常处理代码块
      * @param finallyBlock 无论是否异常都执行的代码块
      */
-    fun getWeather(location: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getWeather(locationId: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    locationMap[location]?.value = httpRepository.getDailyWeather(location).dataList
+                    val cachedLocationWeather = getCachedLocationWeather(locationId)
+                    cachedLocationWeather?.let {
+                        it.weatherList?.value = httpRepository.getDailyWeather(it.locationName).dataList
+                    }
                 },
                 {
                     catchBlock(it)
@@ -52,6 +50,19 @@ class DailyWeatherViewModel : BaseViewModel() {
 
     }
 
-    fun getLocationList() = mLocationList
-    fun getLocation(index: Int) = mLocationList[index]
+    fun getCachedLocationWeather(locationId: String): LocationWeather? {
+        for (cachedLocationWeather in cachedLocationWeatherList) {
+            if (cachedLocationWeather.id == locationId) {
+                return cachedLocationWeather
+            }
+        }
+        return null
+    }
+
+    fun getLocationList() = cachedLocationWeatherList
+    fun getLocationId(index: Int) = cachedLocationWeatherList[index].id
+
+    fun updateLocationName(locationId: String, locationName: String) {
+        getCachedLocationWeather(locationId)?.locationName = locationName
+    }
 }

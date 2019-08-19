@@ -16,7 +16,7 @@ object OkHttpUrl {
 }
 
 object WeatherTypes {
-//    xue, lei, shachen, wu, bingbao, yun, yu, yin, qing
+    //    xue, lei, shachen, wu, bingbao, yun, yu, yin, qing
     const val SUNNY = "qing"
     const val CLOUDY = "yun"
     const val RAINY = "yu"
@@ -26,6 +26,6 @@ object WeatherTypes {
 
 object SpConst {
     const val DEFAULT_SP_FILE = "DEFAULT_SP_FILE"
-    const val CURRENT_LOCATION_CITY_NAME = "CURRENT_LOCATION_CITY_NAME"
+    const val CURRENT_LOCATION_NAME = "CURRENT_LOCATION_NAME"
 }
 

@@ -9,5 +9,5 @@ import retrofit2.http.Query
 
 interface Api {
     @GET("?appid=$APP_ID&appsecret=$APP_SECRET&version=$DAILY_API_VER")
-    suspend fun getDailyWeather(@Query("city") cityName: String):DailyWeatherResp
+    suspend fun getDailyWeather(@Query("city") cityName: String): DailyWeatherResp
 }

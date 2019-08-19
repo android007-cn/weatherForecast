@@ -19,7 +19,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     override fun layoutId(): Int = R.layout.activity_weather
 
     override fun initData() {
-        viewModel().initLocations(listOf(CURRENT_LOCATION, "南京", "赤峰", "天津"))
+        viewModel().initLocations(listOf(CURRENT_LOCATION, "赤峰", "天津"))
     }
 
     override fun initViews() {
@@ -32,7 +32,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     private fun initSwipeRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-//            locateAndFetchWeatherRequirePermission(false)
+            initViewPagerView()
         }
     }
 

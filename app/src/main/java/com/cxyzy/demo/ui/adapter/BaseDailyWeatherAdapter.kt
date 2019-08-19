@@ -14,9 +14,9 @@ import com.cxyzy.demo.utils.WeatherTypes.SUNNY
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.item_daily_forecast.view.*
 
-open class BaseDailyWeatherAdapter(var activity: AppCompatActivity, var viewModel: DailyWeatherViewModel, var locationName: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class BaseDailyWeatherAdapter(var activity: AppCompatActivity, var viewModel: DailyWeatherViewModel, var locationId: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
-    var mDataList = mutableListOf<DailyWeatherResp.Data>()
+    private var mDataList = mutableListOf<DailyWeatherResp.Data>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = mDataList[position]
@@ -35,12 +35,12 @@ open class BaseDailyWeatherAdapter(var activity: AppCompatActivity, var viewMode
         }
     }
 
-    fun queryWeather() {
-        this.viewModel.getWeather(location = locationName,
+    open fun queryWeather() {
+        viewModel.getWeather(locationId = locationId,
                 tryBlock = {},
                 catchBlock = {},
                 finallyBlock = {
-                    this.viewModel.locationMap[locationName]?.observe(activity, Observer {
+                    viewModel.getCachedLocationWeather(locationId)?.weatherList?.observe(activity, Observer {
                         setData(it)
                     })
                 })
@@ -65,4 +65,6 @@ open class BaseDailyWeatherAdapter(var activity: AppCompatActivity, var viewMode
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
+
+
 }

@@ -27,11 +27,13 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
                 val inflater = LayoutInflater.from(activity)
                 val rootView = inflater.inflate(R.layout.vp_weather, container, false) as ViewGroup
                 val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
-                val locationName = getLocationName(viewModel, position)
-                val adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationName, activity, viewModel)
-                recyclerView.adapter = adapter
-                adapter.queryWeather()
-                container.addView(rootView)
+                val locationId = getLocationId(viewModel, position)
+                locationId.let {
+                    val adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationId, activity, viewModel)
+                    recyclerView.adapter = adapter
+                    adapter.queryWeather()
+                    container.addView(rootView)
+                }
                 return rootView
             }
 
@@ -44,7 +46,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
             }
 
             override fun getPageTitle(position: Int): CharSequence? {
-                return getLocationName(viewModel, position)
+                return getLocationId(viewModel, position)
             }
 
             override fun getCount(): Int {
@@ -57,8 +59,8 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         }
     }
 
-    private fun getLocationName(viewModel: DailyWeatherViewModel, position: Int) =
-            viewModel.getLocation(position)
+    private fun getLocationId(viewModel: DailyWeatherViewModel, position: Int) =
+            viewModel.getLocationId(position)
 
     fun getViewPager(): ViewPager = viewPager
 
