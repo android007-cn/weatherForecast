@@ -65,4 +65,6 @@ class DailyWeatherViewModel : BaseViewModel() {
     fun updateLocationName(locationId: String, locationName: String) {
         getCachedLocationWeather(locationId)?.locationName = locationName
     }
+
+    fun getLocationCount() = cachedLocationWeatherList.size
 }

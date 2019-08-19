@@ -23,6 +23,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
     }
 
     fun initViews(activity: AppCompatActivity, viewModel: DailyWeatherViewModel, loadIndicator: LoadIndicator) {
+        viewPager.offscreenPageLimit = viewModel.getLocationCount()
         viewPager.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val inflater = LayoutInflater.from(activity)
