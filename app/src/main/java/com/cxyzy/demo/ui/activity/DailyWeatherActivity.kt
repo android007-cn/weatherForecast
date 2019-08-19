@@ -13,7 +13,9 @@ import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_weather.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
+class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>(), LoadIndicator {
+
+
     override fun viewModel(): DailyWeatherViewModel = getViewModel()
 
     override fun layoutId(): Int = R.layout.activity_weather
@@ -37,7 +39,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
     }
 
     private fun initViewPagerView() {
-        viewPagerView.initViews(this, viewModel())
+        viewPagerView.initViews(this, viewModel(),this)
         dotsIndicator.attachViewPager(viewPagerView.getViewPager())
     }
 
@@ -65,6 +67,14 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun showLoading() {
+        progressBar.visibility = VISIBLE
+    }
+
+    override fun hideLoading(isSuccess: Boolean) {
+        progressBar.visibility = GONE
     }
 
 }

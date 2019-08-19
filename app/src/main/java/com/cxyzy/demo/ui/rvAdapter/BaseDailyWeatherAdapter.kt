@@ -8,13 +8,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.DailyWeatherResp
+import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.utils.WeatherTypes.CLOUDY
 import com.cxyzy.demo.utils.WeatherTypes.RAINY
 import com.cxyzy.demo.utils.WeatherTypes.SUNNY
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.item_daily_forecast.view.*
 
-open class BaseDailyWeatherAdapter(var activity: AppCompatActivity, var viewModel: DailyWeatherViewModel, var locationId: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class BaseDailyWeatherAdapter(var locationId: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    lateinit var activity: AppCompatActivity
+    lateinit var viewModel: DailyWeatherViewModel
+    lateinit var loadIndicator: LoadIndicator
+
     private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
     private var mDataList = mutableListOf<DailyWeatherResp.Data>()
 
@@ -40,6 +45,7 @@ open class BaseDailyWeatherAdapter(var activity: AppCompatActivity, var viewMode
                 tryBlock = {},
                 catchBlock = {},
                 finallyBlock = {
+                    loadIndicator.hideLoading(true)
                     viewModel.getCachedLocationWeather(locationId)?.weatherList?.observe(activity, Observer {
                         setData(it)
                     })

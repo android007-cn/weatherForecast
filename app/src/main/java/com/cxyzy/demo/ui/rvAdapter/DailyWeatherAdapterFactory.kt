@@ -1,15 +1,13 @@
 package com.cxyzy.demo.ui.rvAdapter
 
-import androidx.appcompat.app.AppCompatActivity
 import com.cxyzy.demo.utils.CURRENT_LOCATION
-import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 
 object DailyWeatherAdapterFactory {
-    fun getDailyWeatherAdapter(locationId: String, activity: AppCompatActivity, viewModel: DailyWeatherViewModel): BaseDailyWeatherAdapter {
+    fun getDailyWeatherAdapter(locationId: String): BaseDailyWeatherAdapter {
         return if (CURRENT_LOCATION == locationId) {
-            CurrentLocationDailyWeatherAdapter(activity, viewModel, locationId)
+            CurrentLocationDailyWeatherAdapter(locationId)
         } else {
-            BaseDailyWeatherAdapter(activity, viewModel, locationId)
+            BaseDailyWeatherAdapter(locationId)
         }
     }
 }

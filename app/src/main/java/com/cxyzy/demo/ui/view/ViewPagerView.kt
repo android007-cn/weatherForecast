@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.cxyzy.demo.R
+import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.ui.rvAdapter.DailyWeatherAdapterFactory
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.view_pager_view.view.*
@@ -21,7 +22,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         LayoutInflater.from(context).inflate(R.layout.view_pager_view, this, true)
     }
 
-    fun initViews(activity: AppCompatActivity, viewModel: DailyWeatherViewModel) {
+    fun initViews(activity: AppCompatActivity, viewModel: DailyWeatherViewModel, loadIndicator: LoadIndicator) {
         viewPager.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val inflater = LayoutInflater.from(activity)
@@ -29,7 +30,10 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
                 val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
                 val locationId = getLocationId(viewModel, position)
                 locationId.let {
-                    val adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationId, activity, viewModel)
+                    val adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationId)
+                    adapter.activity = activity
+                    adapter.viewModel = viewModel
+                    adapter.loadIndicator = loadIndicator
                     recyclerView.adapter = adapter
                     adapter.queryWeather()
                     container.addView(rootView)
