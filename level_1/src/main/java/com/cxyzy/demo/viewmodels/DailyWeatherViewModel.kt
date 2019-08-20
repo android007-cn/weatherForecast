@@ -7,20 +7,6 @@ import com.cxyzy.demo.network.response.DailyWeatherResp
 class DailyWeatherViewModel : BaseViewModel() {
     var weatherList: MutableLiveData<List<DailyWeatherResp.Data>> = MutableLiveData()
 
-    fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
-        launchOnUITryCatch(
-                {
-                    tryBlock()
-                    //TODO: get DailyWeatherResp detail
-                },
-                {
-                    catchBlock(it)
-                    error(it)
-                },
-                { finallyBlock() },
-                true)
-    }
-
     /**
      * @param tryBlock 主要执行代码块
      * @param catchBlock 异常处理代码块

@@ -1,8 +1,9 @@
 package com.cxyzy.demo.network
 
-import com.cxyzy.demo.ext.provideOkHttpClient
 import com.cxyzy.demo.utils.OkHttpUrl
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,5 +18,12 @@ object HttpRepository {
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
                 .create(Api::class.java)
+    }
+
+    private fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+                .apply {
+                    addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+                }.build()
     }
 }
