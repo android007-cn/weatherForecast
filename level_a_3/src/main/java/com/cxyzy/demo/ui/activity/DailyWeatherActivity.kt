@@ -17,7 +17,13 @@ class DailyWeatherActivity : AppCompatActivity() {
         initViews()
     }
 
+
     private fun initViews() {
+
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         val adapter = DailyWeatherAdapter()
         rv.adapter = adapter
 

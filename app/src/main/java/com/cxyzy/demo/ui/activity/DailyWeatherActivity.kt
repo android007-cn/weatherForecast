@@ -10,7 +10,7 @@ import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import com.cxyzy.utils.ext.toast
-import kotlinx.android.synthetic.main.activity_weather.*
+import kotlinx.android.synthetic.main.activity_daily_weather.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>(), LoadIndicator {
@@ -18,7 +18,7 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>(), LoadIndicato
 
     override fun viewModel(): DailyWeatherViewModel = getViewModel()
 
-    override fun layoutId(): Int = R.layout.activity_weather
+    override fun layoutId(): Int = R.layout.activity_daily_weather
 
     override fun initData() {
         viewModel().initLocations(listOf(CURRENT_LOCATION, "赤峰", "天津"))

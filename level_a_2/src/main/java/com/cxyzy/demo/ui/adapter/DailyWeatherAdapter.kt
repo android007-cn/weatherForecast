@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.DailyWeatherResp
-import kotlinx.android.synthetic.main.item_weather.view.*
+import kotlinx.android.synthetic.main.item_daily_weather.view.*
 
 class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
@@ -21,7 +21,7 @@ class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = dataList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_weather, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_daily_weather, parent, false)
         return ViewHolder(view)
     }
 
