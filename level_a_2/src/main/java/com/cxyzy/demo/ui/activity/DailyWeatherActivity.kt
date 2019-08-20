@@ -11,6 +11,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class DailyWeatherActivity : AppCompatActivity() {
+    private val adapter = DailyWeatherAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily_weather)
@@ -18,11 +19,18 @@ class DailyWeatherActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        val adapter = DailyWeatherAdapter()
-        rv.adapter = adapter
+        initRecyclerView()
+        queryDailyWeather()
+    }
 
+    private fun initRecyclerView() {
+        rv.adapter = adapter
+    }
+
+    private fun queryDailyWeather() {
         GlobalScope.launch(Dispatchers.Main)
         {
+            adapter.dataList.clear()
             adapter.dataList.addAll(HttpRepository.getDailyWeather().dataList)
             adapter.notifyDataSetChanged()
         }

@@ -17,6 +17,10 @@ class DailyWeatherActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        queryDailyWeather()
+    }
+
+    private fun queryDailyWeather() {
         GlobalScope.launch(Dispatchers.Main)
         {
             textView.text = HttpRepository.getDailyWeather().dataList.toString()
