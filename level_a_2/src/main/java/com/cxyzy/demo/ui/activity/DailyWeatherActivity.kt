@@ -4,22 +4,27 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.HttpRepository
+import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
 import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class DailyWeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_weather)
         initViews()
     }
 
     private fun initViews() {
+        val adapter = DailyWeatherAdapter()
+        rv.adapter = adapter
+
         GlobalScope.launch(Dispatchers.Main)
         {
-            textView.text = HttpRepository.getDailyWeather().dataList.toString()
+            adapter.dataList.addAll(HttpRepository.getDailyWeather().dataList)
+            adapter.notifyDataSetChanged()
         }
     }
 

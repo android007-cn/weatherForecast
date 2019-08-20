@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.WeatherResp
+import com.cxyzy.demo.network.DailyWeatherResp
 import kotlinx.android.synthetic.main.item_weather.view.*
 
-class WeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var onItemClick: (resp: WeatherResp.Data) -> Unit
-    var dataList = mutableListOf<WeatherResp.Data>()
+class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
+    var dataList = mutableListOf<DailyWeatherResp.Data>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = dataList[position]

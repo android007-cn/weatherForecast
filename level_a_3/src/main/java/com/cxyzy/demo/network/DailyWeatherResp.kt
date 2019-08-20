@@ -2,7 +2,7 @@ package com.cxyzy.demo.network
 import com.google.gson.annotations.SerializedName
 
 
-data class WeatherResp(
+data class DailyWeatherResp(
         @SerializedName("data")
     var dataList: List<Data>,
         @SerializedName("city")

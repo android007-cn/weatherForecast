@@ -8,7 +8,7 @@ import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.activity_repo.*
 
-class MainActivity : AppCompatActivity() {
+class DailyWeatherActivity : AppCompatActivity() {
     private val adapter = DailyWeatherAdapter()
     private val viewModel = DailyWeatherViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
