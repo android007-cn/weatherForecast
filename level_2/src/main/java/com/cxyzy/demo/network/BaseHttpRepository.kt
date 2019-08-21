@@ -7,13 +7,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 open class BaseHttpRepository {
-    val api: Api by lazy {
+    val networkApi: NetworkApi by lazy {
         val okHttpClient = provideOkHttpClient()
         Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
-                .create(Api::class.java)
+                .create(NetworkApi::class.java)
     }
 }

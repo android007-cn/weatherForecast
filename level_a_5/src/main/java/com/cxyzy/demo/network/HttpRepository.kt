@@ -8,16 +8,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object HttpRepository {
-    suspend fun getDailyWeather() = api.getDailyWeather(cityName = "南京")
+    suspend fun getDailyWeather() = NETWORK_API.getDailyWeather(cityName = "南京")
 
-    private val api: Api by lazy {
+    private val NETWORK_API: NetworkApi by lazy {
         val okHttpClient = provideOkHttpClient()
         Retrofit.Builder()
                 .baseUrl(OkHttpUrl.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
-                .create(Api::class.java)
+                .create(NetworkApi::class.java)
     }
 
     private fun provideOkHttpClient(): OkHttpClient {
