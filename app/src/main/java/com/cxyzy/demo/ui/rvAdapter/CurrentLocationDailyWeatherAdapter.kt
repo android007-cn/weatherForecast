@@ -15,6 +15,7 @@ import com.cxyzy.demo.utils.*
 import com.cxyzy.utils.LocationUtils
 import com.cxyzy.utils.ext.toast
 
+
 class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherAdapter(locationId) {
 
     private fun locateAndFetchWeatherRequirePermission() {
