@@ -2,6 +2,7 @@ package com.cxyzy.demo.viewmodels
 
 import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
+import com.cxyzy.demo.utils.CURRENT_LOCATION
 
 class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
@@ -23,7 +24,11 @@ class DailyWeatherViewModel : BaseViewModel() {
 
     fun initLocations(locationList: List<String>) {
         for (location in locationList) {
-            cachedLocationWeatherList.add(LocationWeather(id = location, locationName = location))
+            var locationName = location
+            if (location == CURRENT_LOCATION) {
+                locationName = ""
+            }
+            cachedLocationWeatherList.add(LocationWeather(id = location, locationName = locationName))
         }
     }
 

@@ -15,7 +15,7 @@ class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherA
                 loadIndicator.showLoading()
                 locateAndFetchWeather()
             } else {
-                Utils.showAlert(activity.getString(R.string.need_open_location_switch), activity)
+                superQueryWeather()
             }
         }
     }
@@ -23,7 +23,7 @@ class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherA
     override fun queryWeather() {
         val currentLocationName = SpUtil.getSp(SpConst.CURRENT_LOCATION_NAME)
         if (!TextUtils.isEmpty(currentLocationName)) {
-            super@CurrentLocationDailyWeatherAdapter.queryWeather()
+            superQueryWeather()
             viewModel.updateLocationName(locationId, currentLocationName!!)
         } else {
             locateAndFetchWeatherRequirePermission()
@@ -40,9 +40,13 @@ class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherA
                 val locationName = location.cityName.removeSuffix("市")
                 SpUtil.saveSp(SpConst.CURRENT_LOCATION_NAME, locationName)
                 viewModel.updateLocationName(locationId, locationName)
-                super@CurrentLocationDailyWeatherAdapter.queryWeather()
+                superQueryWeather()
             }
         })
+    }
+
+    private fun superQueryWeather() {
+        super@CurrentLocationDailyWeatherAdapter.queryWeather()
     }
 
 }
