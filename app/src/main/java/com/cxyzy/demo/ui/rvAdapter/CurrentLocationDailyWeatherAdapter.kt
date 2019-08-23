@@ -13,7 +13,6 @@ import com.cxyzy.utils.ext.toast
 
 class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherAdapter(locationId) {
 
-
     private fun locateAndFetchWeatherRequirePermission() {
         activity.runWithPermissions(Permission.ACCESS_FINE_LOCATION) {
             if (LocationUtils.isLocationProviderEnabled(activity)) {

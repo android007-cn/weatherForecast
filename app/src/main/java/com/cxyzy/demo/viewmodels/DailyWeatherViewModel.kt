@@ -6,7 +6,7 @@ import com.cxyzy.demo.utils.CURRENT_LOCATION
 
 class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
-    var cachedLocationWeatherList = ArrayList<LocationWeather>()
+    private var cachedLocationWeatherList = ArrayList<LocationWeather>()
 
     fun getWeatherDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
