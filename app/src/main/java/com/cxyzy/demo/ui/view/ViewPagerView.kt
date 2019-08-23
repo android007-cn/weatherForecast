@@ -1,10 +1,12 @@
 package com.cxyzy.demo.ui.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,7 @@ import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.ui.rvAdapter.DailyWeatherAdapterFactory
+import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.view_pager_view.view.*
 
@@ -34,8 +37,8 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val inflater = LayoutInflater.from(activity)
                 val rootView = inflater.inflate(R.layout.vp_weather, container, false) as ViewGroup
-                initRecyclerView(rootView, viewModel, position, activity, loadIndicator)
                 queryRealTimeWeather(rootView, viewModel, position)
+                initRecyclerView(rootView, viewModel, position, activity, loadIndicator)
                 container.addView(rootView)
                 return rootView
             }
@@ -88,19 +91,29 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         val locationId = getLocationId(viewModel, position)
         viewModel.getRealTimeWeather(
             locationId = locationId,
-            onSuccess = { initRealTimeWeather(rootView, it) },
+            onSuccess = { initRealTimeWeather(rootView, it, locationId) },
             onFailed = {},
             onFinal = {})
     }
 
-    private fun initRealTimeWeather(rootView: ViewGroup, realTimeWeatherResp: RealTimeWeatherResp) {
-        rootView.findViewById<TextView>(R.id.currentTemperatureTv).text = realTimeWeatherResp.tem
-        rootView.findViewById<TextView>(R.id.currentHighLowTemperatureTv).text =
-            "${realTimeWeatherResp.tem1}℃ / ${realTimeWeatherResp.tem2}℃"
-        rootView.findViewById<TextView>(R.id.weatherDescTv).text = realTimeWeatherResp.wea
-        rootView.findViewById<TextView>(R.id.locationNameTv).text = realTimeWeatherResp.city
-        rootView.findViewById<TextView>(R.id.currentTemperatureTv).text = realTimeWeatherResp.tem
-        rootView.findViewById<TextView>(R.id.currentTemperatureTv).text = realTimeWeatherResp.tem
-
+    @SuppressLint("SetTextI18n")
+    private fun initRealTimeWeather(
+        rootView: ViewGroup,
+        resp: RealTimeWeatherResp,
+        locationId: String
+    ) {
+        rootView.findViewById<View>(R.id.realTimeWeatherLayout).visibility = View.VISIBLE
+        rootView.findViewById<TextView>(R.id.realTimeTemperatureTv).text = resp.tem
+        rootView.findViewById<TextView>(R.id.realTimeHighLowTemperatureTv).text =
+            "${resp.tem1}℃ / ${resp.tem2}℃"
+        rootView.findViewById<TextView>(R.id.weatherDescTv).text = resp.wea
+        rootView.findViewById<TextView>(R.id.locationNameTv).text = resp.city
+        rootView.findViewById<TextView>(R.id.realTimeTemperatureTv).text = resp.tem
+        rootView.findViewById<TextView>(R.id.realTimeTemperatureTv).text = resp.tem
+        rootView.findViewById<TextView>(R.id.lastUpdateTimeTv).text =
+            context.getString(R.string.last_update_time, resp.updateTime)
+        if (locationId == CURRENT_LOCATION) {
+            rootView.findViewById<ImageView>(R.id.currentLocationIv).visibility = View.VISIBLE
+        }
     }
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">贝壳天气</string>
     <string name="need_open_location_switch">本应用需要获取地理位置，请打开获取位置的开关</string>
+    <string name="last_update_time">上次更新时间：%1$s</string>
 </resources>
