@@ -76,14 +76,14 @@ data class DailyWeatherResp(
                 @SerializedName("title")
                 var title: String
         )
-
-        data class Alarm(
-                @SerializedName("alarm_content")
-                var alarmContent: String,
-                @SerializedName("alarm_level")
-                var alarmLevel: String,
-                @SerializedName("alarm_type")
-                var alarmType: String
-        )
     }
 }
+
+data class Alarm(
+        @SerializedName("alarm_content")
+        var alarmContent: String,
+        @SerializedName("alarm_level")
+        var alarmLevel: String,
+        @SerializedName("alarm_type")
+        var alarmType: String
+)

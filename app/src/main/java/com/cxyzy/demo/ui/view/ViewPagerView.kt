@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.cxyzy.demo.R
+import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.ui.rvAdapter.DailyWeatherAdapterFactory
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
@@ -22,21 +24,18 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         LayoutInflater.from(context).inflate(R.layout.view_pager_view, this, true)
     }
 
-    fun initViews(activity: AppCompatActivity, viewModel: DailyWeatherViewModel, loadIndicator: LoadIndicator) {
+    fun initViews(
+        activity: AppCompatActivity,
+        viewModel: DailyWeatherViewModel,
+        loadIndicator: LoadIndicator
+    ) {
         viewPager.offscreenPageLimit = viewModel.getLocationCount()
         viewPager.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val inflater = LayoutInflater.from(activity)
                 val rootView = inflater.inflate(R.layout.vp_weather, container, false) as ViewGroup
-                val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
-                val locationId = getLocationId(viewModel, position)
-
-                recyclerView.adapter = DailyWeatherAdapterFactory.getDailyWeatherAdapter(locationId).also {
-                    it.activity = activity
-                    it.viewModel = viewModel
-                    it.loadIndicator = loadIndicator
-                    it.queryWeather()
-                }
+                initRecyclerView(rootView, viewModel, position, activity, loadIndicator)
+                queryRealTimeWeather(rootView, viewModel, position)
                 container.addView(rootView)
                 return rootView
             }
@@ -63,9 +62,45 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         }
     }
 
+
+    private fun initRecyclerView(
+        rootView: ViewGroup, viewModel: DailyWeatherViewModel, position: Int,
+        activity: AppCompatActivity, loadIndicator: LoadIndicator
+    ) {
+        val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
+        val locationId = getLocationId(viewModel, position)
+
+        recyclerView.adapter =
+            DailyWeatherAdapterFactory.getDailyWeatherRvAdapter(locationId).also {
+                it.activity = activity
+                it.viewModel = viewModel
+                it.loadIndicator = loadIndicator
+                it.queryWeather()
+            }
+    }
+
     private fun getLocationId(viewModel: DailyWeatherViewModel, position: Int) =
-            viewModel.getLocationId(position)
+        viewModel.getLocationId(position)
 
     fun getViewPager(): ViewPager = viewPager
 
+    fun queryRealTimeWeather(rootView: ViewGroup, viewModel: DailyWeatherViewModel, position: Int) {
+        val locationId = getLocationId(viewModel, position)
+        viewModel.getRealTimeWeather(
+            locationId = locationId,
+            onSuccess = { initRealTimeWeather(rootView, it) },
+            onFailed = {},
+            onFinal = {})
+    }
+
+    private fun initRealTimeWeather(rootView: ViewGroup, realTimeWeatherResp: RealTimeWeatherResp) {
+        rootView.findViewById<TextView>(R.id.currentTemperatureTv).text = realTimeWeatherResp.tem
+        rootView.findViewById<TextView>(R.id.currentHighLowTemperatureTv).text =
+            "${realTimeWeatherResp.tem1}℃ / ${realTimeWeatherResp.tem2}℃"
+        rootView.findViewById<TextView>(R.id.weatherDescTv).text = realTimeWeatherResp.wea
+        rootView.findViewById<TextView>(R.id.locationNameTv).text = realTimeWeatherResp.city
+        rootView.findViewById<TextView>(R.id.currentTemperatureTv).text = realTimeWeatherResp.tem
+        rootView.findViewById<TextView>(R.id.currentTemperatureTv).text = realTimeWeatherResp.tem
+
+    }
 }
