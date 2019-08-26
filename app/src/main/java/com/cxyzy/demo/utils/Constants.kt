@@ -16,11 +16,9 @@ object OkHttpUrl {
 }
 
 object WeatherTypes {
-    //    xue, lei, shachen, wu, bingbao, yun, yu, yin, qing
-    const val SUNNY = "qing"
-    const val CLOUDY = "yun"
-    const val RAINY = "yu"
-    const val LOGIN_URL = "user/login"
+    const val SUNNY = "晴"
+    const val CLOUDY = "多云"
+    const val RAINY = "雨"
 }
 
 

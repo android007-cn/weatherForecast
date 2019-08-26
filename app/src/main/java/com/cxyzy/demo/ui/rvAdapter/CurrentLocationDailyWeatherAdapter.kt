@@ -1,17 +1,18 @@
-/*
- * Copyright (c) 2019. test
- */
-
 package com.cxyzy.demo.ui.rvAdapter
 
 import android.text.TextUtils
 import com.afollestad.assent.Permission
 import com.afollestad.assent.runWithPermissions
+import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.utils.*
 import com.cxyzy.utils.LocationUtils
 import com.cxyzy.utils.ext.toast
 
-class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherAdapter(locationId) {
+class CurrentLocationDailyWeatherAdapter(locationId: String, isToday: Boolean) :
+    BaseDailyWeatherAdapter(
+        locationId,
+        isToday
+    ) {
 
     private fun locateAndFetchWeatherRequirePermission() {
         activity.runWithPermissions(Permission.ACCESS_FINE_LOCATION) {

@@ -36,7 +36,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         viewPager.adapter = object : PagerAdapter() {
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val inflater = LayoutInflater.from(activity)
-                val rootView = inflater.inflate(R.layout.vp_weather, container, false) as ViewGroup
+                val rootView = inflater.inflate(R.layout.page_weather_single, container, false) as ViewGroup
                 queryRealTimeWeather(rootView, viewModel, position)
                 initRecyclerView(rootView, viewModel, position, activity, loadIndicator)
                 container.addView(rootView)
@@ -70,16 +70,35 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         rootView: ViewGroup, viewModel: DailyWeatherViewModel, position: Int,
         activity: AppCompatActivity, loadIndicator: LoadIndicator
     ) {
-        val recyclerView = rootView.findViewById<RecyclerView>(R.id.rv)
         val locationId = getLocationId(viewModel, position)
+        val todayRecyclerView =
+            rootView.findViewById<RecyclerView>(R.id.todayRecyclerView)
 
-        recyclerView.adapter =
-            DailyWeatherAdapterFactory.getDailyWeatherRvAdapter(locationId).also {
+        val futureRecyclerView =
+            rootView.findViewById<RecyclerView>(R.id.futureRecyclerView)
+
+
+        val todayAdapter =
+            DailyWeatherAdapterFactory.getDailyWeatherRvAdapter(locationId, true).also {
                 it.activity = activity
                 it.viewModel = viewModel
                 it.loadIndicator = loadIndicator
-                it.queryDailyWeather()
             }
+
+        val futureAdapter =
+            DailyWeatherAdapterFactory.getDailyWeatherRvAdapter(locationId, false).also {
+                it.activity = activity
+                it.viewModel = viewModel
+                it.loadIndicator = loadIndicator
+            }
+
+        todayRecyclerView.adapter = todayAdapter
+        futureRecyclerView.adapter = futureAdapter
+
+        todayAdapter.queryDailyWeather()
+        futureAdapter.queryDailyWeather()
+
+
     }
 
     private fun getLocationId(viewModel: DailyWeatherViewModel, position: Int) =

@@ -20,7 +20,7 @@
         android:src="@mipmap/cloudy" />
 
     <TextView
-        android:id="@+id/tempratureTv"
+        android:id="@+id/temperatureTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="34°C" />
