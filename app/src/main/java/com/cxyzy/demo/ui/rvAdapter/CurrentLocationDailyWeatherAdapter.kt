@@ -24,7 +24,7 @@ class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherA
         }
     }
 
-    override fun queryWeather() {
+    override fun queryDailyWeather() {
         val currentLocationName = SpUtil.getSp(SpConst.CURRENT_LOCATION_NAME)
         if (!TextUtils.isEmpty(currentLocationName)) {
             superQueryWeather()
@@ -50,7 +50,7 @@ class CurrentLocationDailyWeatherAdapter(locationId: String) : BaseDailyWeatherA
     }
 
     private fun superQueryWeather() {
-        super@CurrentLocationDailyWeatherAdapter.queryWeather()
+        super@CurrentLocationDailyWeatherAdapter.queryDailyWeather()
     }
 
 }

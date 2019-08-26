@@ -49,7 +49,7 @@ class DailyWeatherViewModel : BaseViewModel() {
      * @param catchBlock 异常处理代码块
      * @param finallyBlock 无论是否异常都执行的代码块
      */
-    fun getWeather(
+    fun queryDailyWeather(
         locationId: String,
         tryBlock: () -> Unit,
         catchBlock: (throwable: Throwable) -> Unit,
@@ -60,7 +60,7 @@ class DailyWeatherViewModel : BaseViewModel() {
                 tryBlock()
                 val cachedLocationWeather = getCachedLocationWeather(locationId)
                 cachedLocationWeather?.let {
-                    it.weatherList?.value = httpRepository.getDailyWeather(it.locationName).dataList
+                    it.weatherList?.value = httpRepository.queryDailyWeather(it.locationName).dataList
                 }
             },
             {

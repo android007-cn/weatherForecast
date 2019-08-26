@@ -11,8 +11,8 @@ import retrofit2.http.Query
 
 interface NetworkApi {
     @GET("?appid=$APP_ID&appsecret=$APP_SECRET&version=$DAILY_API_VER")
-    suspend fun getDailyWeather(@Query("city") cityName: String): DailyWeatherResp
+    suspend fun queryDailyWeather(@Query("city") cityName: String): DailyWeatherResp
 
     @GET("?appid=$APP_ID&appsecret=$APP_SECRET&version=$CURRENT_API_VER")
-    suspend fun getRealTimeWeather(@Query("city") cityName: String): RealTimeWeatherResp
+    suspend fun queryRealTimeWeather(@Query("city") cityName: String): RealTimeWeatherResp
 }

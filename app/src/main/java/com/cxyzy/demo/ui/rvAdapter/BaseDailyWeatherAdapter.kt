@@ -40,8 +40,8 @@ open class BaseDailyWeatherAdapter(var locationId: String) : RecyclerView.Adapte
         }
     }
 
-    open fun queryWeather() {
-        viewModel.getWeather(locationId = locationId,
+    open fun queryDailyWeather() {
+        viewModel.queryDailyWeather(locationId = locationId,
                 tryBlock = {},
                 catchBlock = {},
                 finallyBlock = {

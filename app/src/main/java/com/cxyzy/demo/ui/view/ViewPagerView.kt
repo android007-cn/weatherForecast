@@ -78,7 +78,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
                 it.activity = activity
                 it.viewModel = viewModel
                 it.loadIndicator = loadIndicator
-                it.queryWeather()
+                it.queryDailyWeather()
             }
     }
 
