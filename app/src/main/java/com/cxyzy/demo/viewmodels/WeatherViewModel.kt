@@ -14,7 +14,6 @@ class WeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
     private var cachedLocationWeatherList = ArrayList<LocationWeather>()
 
-
     fun initLocations(locationList: List<String>) {
         for (location in locationList) {
             var locationName = location
@@ -29,7 +28,6 @@ class WeatherViewModel : BaseViewModel() {
             )
         }
     }
-
 
     fun queryDailyWeather(
         activity: Activity,
