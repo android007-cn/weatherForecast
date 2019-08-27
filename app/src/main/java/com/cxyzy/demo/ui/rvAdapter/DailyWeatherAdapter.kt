@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_future_forecast.view.dayNameTv
 import kotlinx.android.synthetic.main.item_future_forecast.view.weatherLogoIv
 import kotlinx.android.synthetic.main.item_today_forecast.view.*
 
-open class BaseDailyWeatherAdapter(var locationId: String, var isToday: Boolean) :
+class DailyWeatherAdapter(var locationId: String, var isToday: Boolean) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var activity: AppCompatActivity
     lateinit var viewModel: DailyWeatherViewModel
@@ -53,22 +53,10 @@ open class BaseDailyWeatherAdapter(var locationId: String, var isToday: Boolean)
         }
     }
 
-    open fun queryDailyWeather() {
-        viewModel.queryDailyWeather(locationId = locationId,
-            tryBlock = {},
-            catchBlock = {},
-            finallyBlock = {
-                loadIndicator.hideLoading(true)
-                viewModel.getCachedLocationWeather(locationId)?.weatherList?.observe(
-                    activity,
-                    Observer {
-                        setData(it)
-                    })
-            })
-    }
 
 
-    private fun setData(dataList: List<DailyWeatherResp.Data>) {
+
+     fun setData(dataList: List<DailyWeatherResp.Data>) {
         if (isToday) {
             mTodayDataList.clear()
             mTodayDataList.addAll(dataList[0].hours)

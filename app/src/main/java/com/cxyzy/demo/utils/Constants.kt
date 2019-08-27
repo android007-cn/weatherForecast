@@ -24,6 +24,5 @@ object WeatherTypes {
 
 object SpConst {
     const val DEFAULT_SP_FILE = "DEFAULT_SP_FILE"
-    const val CURRENT_LOCATION_NAME = "CURRENT_LOCATION_NAME"
 }
 

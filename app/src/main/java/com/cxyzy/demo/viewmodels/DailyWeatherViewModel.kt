@@ -1,9 +1,12 @@
 package com.cxyzy.demo.viewmodels
 
+import android.app.Activity
 import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
+import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.utils.CURRENT_LOCATION
+import com.cxyzy.demo.utils.LocateUtil
 
 class DailyWeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
@@ -51,24 +54,23 @@ class DailyWeatherViewModel : BaseViewModel() {
      */
     fun queryDailyWeather(
         locationId: String,
-        tryBlock: () -> Unit,
-        catchBlock: (throwable: Throwable) -> Unit,
-        finallyBlock: () -> Unit
+        onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
+
     ) {
         launchOnUITryCatch(
             {
-                tryBlock()
                 val cachedLocationWeather = getCachedLocationWeather(locationId)
                 cachedLocationWeather?.let {
-                    it.weatherList?.value = httpRepository.queryDailyWeather(it.locationName).dataList
+                    it.weatherList =
+                        httpRepository.queryDailyWeather(it.locationName).dataList
+                    onResult(it.weatherList)
                 }
             },
             {
-                catchBlock(it)
                 error(it)
             },
-            { finallyBlock() },
-            true
+            { },
+            false
         )
 
     }
@@ -122,5 +124,23 @@ class DailyWeatherViewModel : BaseViewModel() {
         getCachedLocationWeather(locationId)?.locationName = locationName
     }
 
+    fun getLocationName(locationId: String) = getCachedLocationWeather(locationId)?.locationName
+
     fun getLocationCount() = cachedLocationWeatherList.size
+
+    fun acquireLocationName(
+        activity: Activity,
+        locationId: String,
+        onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
+    ) {
+        if (locationId == CURRENT_LOCATION) {
+            LocateUtil.locateWithPermission(activity) {
+                updateLocationName(locationId, it)
+                queryDailyWeather(locationId, onResult)
+            }
+        } else {
+            queryDailyWeather(locationId, onResult)
+        }
+
+    }
 }
