@@ -39,7 +39,6 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
                 val rootView =
                     inflater.inflate(R.layout.page_weather_single, container, false) as ViewGroup
                 queryRealTimeWeather(rootView, viewModel, position)
-                loadLocationName(viewModel.getLocationId(position))
                 initRecyclerView(rootView, viewModel, position, activity, loadIndicator)
                 container.addView(rootView)
                 return rootView
@@ -67,11 +66,6 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         }
     }
 
-    private fun loadLocationName(locationId: String) {
-
-    }
-
-
     private fun initRecyclerView(
         rootView: ViewGroup, viewModel: WeatherViewModel, position: Int,
         activity: AppCompatActivity, loadIndicator: LoadIndicator
@@ -86,7 +80,8 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         todayRecyclerView.adapter = todayAdapter
         futureRecyclerView.adapter = futureAdapter
 
-        viewModel.acquireLocationName(activity, locationId) {
+        loadIndicator.showLoading()
+        viewModel.queryDailyWeather(activity, loadIndicator, locationId) {
             todayAdapter.setData(it)
             futureAdapter.setData(it)
         }
@@ -98,7 +93,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
 
     fun getViewPager(): ViewPager = viewPager
 
-    fun queryRealTimeWeather(rootView: ViewGroup, viewModel: WeatherViewModel, position: Int) {
+    fun queryRealTimeWeather(rootView: View, viewModel: WeatherViewModel, position: Int) {
         val locationId = getLocationId(viewModel, position)
         viewModel.getRealTimeWeather(
             locationId = locationId,
@@ -109,7 +104,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
 
     @SuppressLint("SetTextI18n")
     private fun initRealTimeWeather(
-        rootView: ViewGroup,
+        rootView: View,
         resp: RealTimeWeatherResp,
         locationId: String
     ) {

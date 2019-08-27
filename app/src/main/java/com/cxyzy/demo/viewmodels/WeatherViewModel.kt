@@ -5,6 +5,7 @@ import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.network.response.RealTimeWeatherResp
+import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.utils.LocateUtil
 
@@ -49,18 +50,23 @@ class WeatherViewModel : BaseViewModel() {
 
     private fun queryDailyWeather(
         locationId: String,
+        loadIndicator: LoadIndicator,
         onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
     ) {
         launchOnUITryCatch(
             {
-                val cachedLocationWeather = getCachedLocationWeather(locationId)
-                cachedLocationWeather?.let {
-                    it.weatherList =
-                        httpRepository.queryDailyWeather(it.locationName).dataList
-                    onResult(it.weatherList)
+                val weather = getCachedLocationWeather(locationId)
+                if (weather != null) {
+                    weather.weatherList =
+                        httpRepository.queryDailyWeather(weather.locationName).dataList
+                    onResult(weather.weatherList)
+                    loadIndicator.hideLoading(true)
+                } else {
+                    loadIndicator.hideLoading(false)
                 }
             },
             {
+                loadIndicator.hideLoading(false)
                 error(it)
             },
             { },
@@ -90,7 +96,6 @@ class WeatherViewModel : BaseViewModel() {
             { onFinal() },
             true
         )
-
     }
 
     private fun getCachedLocationWeather(locationId: String): LocationWeather? {
@@ -113,25 +118,25 @@ class WeatherViewModel : BaseViewModel() {
 
     fun getLocationList() = cachedLocationWeatherList
     fun getLocationId(index: Int) = cachedLocationWeatherList[index].id
+    fun getLocationCount() = cachedLocationWeatherList.size
 
-    fun updateLocationName(locationId: String, locationName: String) {
+    private fun updateLocationName(locationId: String, locationName: String) {
         getCachedLocationWeather(locationId)?.locationName = locationName
     }
 
-    fun getLocationCount() = cachedLocationWeatherList.size
-
-    fun acquireLocationName(
+    fun queryDailyWeather(
         activity: Activity,
+        loadIndicator: LoadIndicator,
         locationId: String,
         onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
     ) {
         if (locationId == CURRENT_LOCATION) {
             LocateUtil.locateWithPermission(activity) {
                 updateLocationName(locationId, it)
-                queryDailyWeather(locationId, onResult)
+                queryDailyWeather(locationId, loadIndicator, onResult)
             }
         } else {
-            queryDailyWeather(locationId, onResult)
+            queryDailyWeather(locationId, loadIndicator, onResult)
         }
 
     }
