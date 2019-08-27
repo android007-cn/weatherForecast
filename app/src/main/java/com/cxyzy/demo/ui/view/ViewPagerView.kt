@@ -15,7 +15,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.RealTimeWeatherResp
-import com.cxyzy.demo.ui.activity.LoadIndicator
+import com.cxyzy.demo.ui.LoadIndicator
 import com.cxyzy.demo.ui.rvAdapter.DailyWeatherAdapter
 import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.viewmodels.WeatherViewModel

@@ -30,9 +30,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         providerToolBar()?.let { setSupportActionBar(it) }
     }
 
-    /**
-     * 布局文件id
-     */
     abstract fun layoutId(): Int
 
     open fun prepareBeforeInitView() {}
@@ -44,11 +41,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         lifecycle.addObserver(viewModel())
     }
 
-    /**
-     *设置[Toolbar]
-     */
     open fun providerToolBar(): Toolbar? = null
-
 
     override fun onDestroy() {
         viewModel().let {

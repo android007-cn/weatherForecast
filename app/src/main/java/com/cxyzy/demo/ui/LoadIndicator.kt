@@ -1,4 +1,4 @@
-package com.cxyzy.demo.ui.activity
+package com.cxyzy.demo.ui
 
 interface LoadIndicator {
     fun showLoading()

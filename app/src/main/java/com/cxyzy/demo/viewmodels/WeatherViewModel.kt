@@ -5,7 +5,7 @@ import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.network.response.RealTimeWeatherResp
-import com.cxyzy.demo.ui.activity.LoadIndicator
+import com.cxyzy.demo.ui.LoadIndicator
 import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.utils.LocateUtil
 import com.cxyzy.utils.error
