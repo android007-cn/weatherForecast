@@ -8,7 +8,7 @@ import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.utils.LocateUtil
 
-class DailyWeatherViewModel : BaseViewModel() {
+class WeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
     private var cachedLocationWeatherList = ArrayList<LocationWeather>()
 

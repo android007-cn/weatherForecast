@@ -8,15 +8,15 @@ import androidx.appcompat.widget.Toolbar
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.utils.CURRENT_LOCATION
-import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
+import com.cxyzy.demo.viewmodels.WeatherViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_weather_all.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>(), LoadIndicator {
+class WeatherActivity : BaseActivity<WeatherViewModel>(), LoadIndicator {
 
 
-    override fun viewModel(): DailyWeatherViewModel = getViewModel()
+    override fun viewModel(): WeatherViewModel = getViewModel()
 
     override fun layoutId(): Int = R.layout.activity_weather_all
 

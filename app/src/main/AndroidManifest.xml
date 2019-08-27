@@ -34,7 +34,7 @@
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name="com.cxyzy.demo.ui.activity.DailyWeatherActivity">
+        <activity android:name="com.cxyzy.demo.ui.activity.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

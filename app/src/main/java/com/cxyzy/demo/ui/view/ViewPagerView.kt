@@ -18,7 +18,7 @@ import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.ui.rvAdapter.DailyWeatherAdapter
 import com.cxyzy.demo.utils.CURRENT_LOCATION
-import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
+import com.cxyzy.demo.viewmodels.WeatherViewModel
 import kotlinx.android.synthetic.main.view_pager_view.view.*
 
 class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
@@ -29,7 +29,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
 
     fun initViews(
         activity: AppCompatActivity,
-        viewModel: DailyWeatherViewModel,
+        viewModel: WeatherViewModel,
         loadIndicator: LoadIndicator
     ) {
         viewPager.offscreenPageLimit = viewModel.getLocationCount()
@@ -73,7 +73,7 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
 
 
     private fun initRecyclerView(
-        rootView: ViewGroup, viewModel: DailyWeatherViewModel, position: Int,
+        rootView: ViewGroup, viewModel: WeatherViewModel, position: Int,
         activity: AppCompatActivity, loadIndicator: LoadIndicator
     ) {
         val locationId = getLocationId(viewModel, position)
@@ -93,12 +93,12 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
 
     }
 
-    private fun getLocationId(viewModel: DailyWeatherViewModel, position: Int) =
+    private fun getLocationId(viewModel: WeatherViewModel, position: Int) =
         viewModel.getLocationId(position)
 
     fun getViewPager(): ViewPager = viewPager
 
-    fun queryRealTimeWeather(rootView: ViewGroup, viewModel: DailyWeatherViewModel, position: Int) {
+    fun queryRealTimeWeather(rootView: ViewGroup, viewModel: WeatherViewModel, position: Int) {
         val locationId = getLocationId(viewModel, position)
         viewModel.getRealTimeWeather(
             locationId = locationId,
