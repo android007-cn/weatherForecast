@@ -8,6 +8,7 @@ import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.utils.CURRENT_LOCATION
 import com.cxyzy.demo.utils.LocateUtil
+import com.cxyzy.utils.error
 
 class WeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
@@ -28,8 +29,7 @@ class WeatherViewModel : BaseViewModel() {
                 catchBlock(it)
                 error(it)
             },
-            { finallyBlock() },
-            true
+            { finallyBlock() }
         )
     }
 
@@ -69,8 +69,7 @@ class WeatherViewModel : BaseViewModel() {
                 loadIndicator.hideLoading(false)
                 error(it)
             },
-            { },
-            false
+            { }
         )
 
     }
@@ -93,8 +92,7 @@ class WeatherViewModel : BaseViewModel() {
                 onFailed(it)
                 error(it)
             },
-            { onFinal() },
-            true
+            { onFinal() }
         )
     }
 

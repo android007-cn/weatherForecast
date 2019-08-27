@@ -17,7 +17,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUt
         tryBlock: suspend CoroutineScope.() -> Unit,
         cacheBlock: suspend CoroutineScope.(Throwable) -> Unit,
         finallyBlock: suspend CoroutineScope.() -> Unit,
-        handleCancellationExceptionManually: Boolean
+        handleCancellationExceptionManually: Boolean=true
     ) {
         launchOnUI {
             tryCatch(tryBlock, cacheBlock, finallyBlock, handleCancellationExceptionManually)
