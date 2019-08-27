@@ -52,9 +52,9 @@ object AMapLocationUtil {
 }
 
 data class MyLocation(
-        var longitude: Double,
-        var latitude: Double,
-        var cityName: String
+    var longitude: Double,
+    var latitude: Double,
+    var cityName: String
 )
 
 interface Callback {

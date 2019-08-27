@@ -11,7 +11,8 @@ import kotlin.math.abs
 /**
  * 用于解决SwipeRefreshLayout内嵌ViewPager时，出现事件冲突，导致ViewPager不能流畅切换页签的问题。
  */
-class VpSwipeRefreshLayout(context: Context, attrs: AttributeSet) : SwipeRefreshLayout(context, attrs) {
+class VpSwipeRefreshLayout(context: Context, attrs: AttributeSet) :
+    SwipeRefreshLayout(context, attrs) {
 
     private var startY: Float = 0.toFloat()
     private var startX: Float = 0.toFloat()

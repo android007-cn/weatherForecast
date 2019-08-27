@@ -39,21 +39,21 @@ class DailyWeatherActivity : BaseActivity<DailyWeatherViewModel>(), LoadIndicato
     }
 
     private fun initViewPagerView() {
-        viewPagerView.initViews(this, viewModel(),this)
+        viewPagerView.initViews(this, viewModel(), this)
         dotsIndicator.attachViewPager(viewPagerView.getViewPager())
     }
 
     private fun onItemClick(resp: DailyWeatherResp.Data) {
         viewModel().getWeatherDetail(resp.day,
-                {
-                    progressBar.visibility = VISIBLE
-                },
-                {
-                    toast(it.message.toString())
-                },
-                {
-                    progressBar.visibility = GONE
-                })
+            {
+                progressBar.visibility = VISIBLE
+            },
+            {
+                toast(it.message.toString())
+            },
+            {
+                progressBar.visibility = GONE
+            })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

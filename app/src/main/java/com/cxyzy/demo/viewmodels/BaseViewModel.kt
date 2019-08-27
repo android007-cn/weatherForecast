@@ -13,10 +13,11 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUt
         get() = Dispatchers.Main
     private val mLaunchManager: MutableList<Job> = mutableListOf()
 
-    protected fun launchOnUITryCatch(tryBlock: suspend CoroutineScope.() -> Unit,
-                                     cacheBlock: suspend CoroutineScope.(Throwable) -> Unit,
-                                     finallyBlock: suspend CoroutineScope.() -> Unit,
-                                     handleCancellationExceptionManually: Boolean
+    protected fun launchOnUITryCatch(
+        tryBlock: suspend CoroutineScope.() -> Unit,
+        cacheBlock: suspend CoroutineScope.(Throwable) -> Unit,
+        finallyBlock: suspend CoroutineScope.() -> Unit,
+        handleCancellationExceptionManually: Boolean
     ) {
         launchOnUI {
             tryCatch(tryBlock, cacheBlock, finallyBlock, handleCancellationExceptionManually)
@@ -34,10 +35,11 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUt
     }
 
     private suspend fun tryCatch(
-            tryBlock: suspend CoroutineScope.() -> Unit,
-            catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
-            finallyBlock: suspend CoroutineScope.() -> Unit,
-            handleCancellationExceptionManually: Boolean = false) {
+        tryBlock: suspend CoroutineScope.() -> Unit,
+        catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
+        finallyBlock: suspend CoroutineScope.() -> Unit,
+        handleCancellationExceptionManually: Boolean = false
+    ) {
         coroutineScope {
             try {
                 tryBlock()

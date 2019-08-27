@@ -8,8 +8,10 @@ fun provideOkHttpClient(): OkHttpClient {
 //    val sslParams = HttpsUtil.getSslSocketFactory(arrayOf(App.context.resources.openRawResource(R.raw.https_keystore)), null, null)
     return OkHttpClient.Builder()
 //            .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
-            .apply {
-                addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
-                addInterceptor(HttpLogInterceptor())
-            }.build()
+        .apply {
+            addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            addInterceptor(HttpLogInterceptor())
+        }.build()
 }

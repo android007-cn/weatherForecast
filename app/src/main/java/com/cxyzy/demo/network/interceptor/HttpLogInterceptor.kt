@@ -31,11 +31,13 @@ class HttpLogInterceptor : BaseInterceptor() {
             body = buffer.readString(charset!!)
         }
 
-        Log.d(TAG,
-                "发送请求: method：" + request.method()
-                        + "\nurl：" + request.url()
-                        + "\n请求头：" + request.headers()
-                        + "\n请求参数: " + body)
+        Log.d(
+            TAG,
+            "发送请求: method：" + request.method()
+                    + "\nurl：" + request.url()
+                    + "\n请求头：" + request.headers()
+                    + "\n请求参数: " + body
+        )
 
         val startNs = System.nanoTime()
         val response = chain.proceed(request)
@@ -59,11 +61,13 @@ class HttpLogInterceptor : BaseInterceptor() {
         }
         rBody = buffer.clone().readString(charset!!)
 
-        Log.d(TAG,
-                "收到响应: code:" + response.code()
-                        + "\n请求url：" + response.request().url()
-                        + "\n请求body：" + body
-                        + "\nResponse: " + rBody)
+        Log.d(
+            TAG,
+            "收到响应: code:" + response.code()
+                    + "\n请求url：" + response.request().url()
+                    + "\n请求body：" + body
+                    + "\nResponse: " + rBody
+        )
 
         return response
     }

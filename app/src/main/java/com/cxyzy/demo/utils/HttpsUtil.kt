@@ -67,7 +67,11 @@ class HttpsUtil {
 
     companion object {
 
-        fun getSslSocketFactory(certificates: Array<InputStream>, bksFile: InputStream?, password: String?): SSLParams {
+        fun getSslSocketFactory(
+            certificates: Array<InputStream>,
+            bksFile: InputStream?,
+            password: String?
+        ): SSLParams {
             val sslParams = SSLParams()
             try {
                 val trustManagers = prepareTrustManager(*certificates)
@@ -97,14 +101,18 @@ class HttpsUtil {
                 keyStore.load(null)
                 for ((index, certificate) in certificates.withIndex()) {
                     val certificateAlias = index.toString()
-                    keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate))
+                    keyStore.setCertificateEntry(
+                        certificateAlias,
+                        certificateFactory.generateCertificate(certificate)
+                    )
                     try {
                         certificate.close()
                     } catch (e: IOException) {
                     }
                 }
 
-                val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+                val trustManagerFactory =
+                    TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
                 trustManagerFactory.init(keyStore)
 
                 return trustManagerFactory.trustManagers
@@ -115,13 +123,17 @@ class HttpsUtil {
             return null
         }
 
-        private fun prepareKeyManager(bksFile: InputStream?, password: String?): Array<KeyManager>? {
+        private fun prepareKeyManager(
+            bksFile: InputStream?,
+            password: String?
+        ): Array<KeyManager>? {
             try {
                 if (bksFile == null || password == null) return null
 
                 val clientKeyStore = KeyStore.getInstance("BKS")
                 clientKeyStore.load(bksFile, password.toCharArray())
-                val keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
+                val keyManagerFactory =
+                    KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
                 keyManagerFactory.init(clientKeyStore, password.toCharArray())
                 return keyManagerFactory.keyManagers
 

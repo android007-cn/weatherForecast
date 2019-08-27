@@ -14,8 +14,11 @@ object SpUtil {
         mDefaultSpFile = defaultSpFile
     }
 
-    fun saveSp(key: String, value: String) = getDefaultSharedPreferences().edit().putString(key, value).apply()
+    fun saveSp(key: String, value: String) =
+        getDefaultSharedPreferences().edit().putString(key, value).apply()
+
     fun getSp(key: String) = getDefaultSharedPreferences().getString(key, null)
 
-    private fun getDefaultSharedPreferences() = mContext.getSharedPreferences(mDefaultSpFile, Context.MODE_PRIVATE)
+    private fun getDefaultSharedPreferences() =
+        mContext.getSharedPreferences(mDefaultSpFile, Context.MODE_PRIVATE)
 }

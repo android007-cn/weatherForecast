@@ -11,10 +11,10 @@ open class BaseHttpRepository {
     val networkApi: NetworkApi by lazy {
         val okHttpClient = KoinInject.getFromKoin<OkHttpClient>()
         Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-                .build()
-                .create(NetworkApi::class.java)
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+            .build()
+            .create(NetworkApi::class.java)
     }
 }

@@ -1,7 +1,7 @@
 package com.cxyzy.demo.network
 
-import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.network.response.DailyWeatherResp
+import com.cxyzy.demo.network.response.RealTimeWeatherResp
 import com.cxyzy.demo.utils.ApiToken.APP_ID
 import com.cxyzy.demo.utils.ApiToken.APP_SECRET
 import com.cxyzy.demo.utils.ApiToken.CURRENT_API_VER
