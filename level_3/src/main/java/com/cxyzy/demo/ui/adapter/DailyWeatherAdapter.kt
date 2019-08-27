@@ -13,7 +13,6 @@ import com.cxyzy.demo.utils.WeatherTypes.SUNNY
 import kotlinx.android.synthetic.main.item_daily_forecast.view.*
 
 class DailyWeatherAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var mContext: Context = context
     private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
     var dataList = mutableListOf<DailyWeatherResp.Data>()
 

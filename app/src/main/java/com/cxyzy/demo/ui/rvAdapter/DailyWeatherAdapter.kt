@@ -67,7 +67,7 @@ class DailyWeatherAdapter(private var isToday: Boolean) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var layoutId = if (isToday) {
+        val layoutId = if (isToday) {
             R.layout.item_today_forecast
         } else {
             R.layout.item_future_forecast

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.response.DailyWeatherResp
 import com.cxyzy.demo.ui.adapter.DailyWeatherAdapter
 import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import com.cxyzy.utils.ext.toast

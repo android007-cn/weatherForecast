@@ -25,9 +25,5 @@ class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    infix fun setOnItemClick(onClick: (resp: DailyWeatherResp.Data) -> Unit) {
-        this.onItemClick = onClick
-    }
-
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 }

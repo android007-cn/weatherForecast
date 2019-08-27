@@ -47,15 +47,9 @@ class DailyWeatherViewModel : BaseViewModel() {
         }
     }
 
-    /**
-     * @param tryBlock 主要执行代码块
-     * @param catchBlock 异常处理代码块
-     * @param finallyBlock 无论是否异常都执行的代码块
-     */
-    fun queryDailyWeather(
+    private fun queryDailyWeather(
         locationId: String,
         onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
-
     ) {
         launchOnUITryCatch(
             {
@@ -99,7 +93,7 @@ class DailyWeatherViewModel : BaseViewModel() {
 
     }
 
-    fun getCachedLocationWeather(locationId: String): LocationWeather? {
+    private fun getCachedLocationWeather(locationId: String): LocationWeather? {
         for (cachedLocationWeather in cachedLocationWeatherList) {
             if (cachedLocationWeather.id == locationId) {
                 return cachedLocationWeather
@@ -108,7 +102,7 @@ class DailyWeatherViewModel : BaseViewModel() {
         return null
     }
 
-    fun getCachedLocationWeatherName(locationId: String): String? {
+    private fun getCachedLocationWeatherName(locationId: String): String? {
         var locationName: String? = null
         val cachedLocationWeather = getCachedLocationWeather(locationId)
         cachedLocationWeather?.let {
@@ -123,8 +117,6 @@ class DailyWeatherViewModel : BaseViewModel() {
     fun updateLocationName(locationId: String, locationName: String) {
         getCachedLocationWeather(locationId)?.locationName = locationName
     }
-
-    fun getLocationName(locationId: String) = getCachedLocationWeather(locationId)?.locationName
 
     fun getLocationCount() = cachedLocationWeatherList.size
 

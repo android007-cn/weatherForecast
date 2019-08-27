@@ -16,5 +16,4 @@ object WeatherTypes {
     const val SUNNY = "qing"
     const val CLOUDY = "yun"
     const val RAINY = "yu"
-    const val LOGIN_URL = "user/login"
 }
