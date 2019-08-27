@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_future_forecast.view.dayNameTv
 import kotlinx.android.synthetic.main.item_future_forecast.view.weatherLogoIv
 import kotlinx.android.synthetic.main.item_today_forecast.view.*
 
-class DailyWeatherAdapter(var locationId: String, var isToday: Boolean) :
+class DailyWeatherAdapter(var isToday: Boolean) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var activity: AppCompatActivity
     lateinit var viewModel: DailyWeatherViewModel

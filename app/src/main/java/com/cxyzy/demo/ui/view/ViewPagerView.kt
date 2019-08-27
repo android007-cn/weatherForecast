@@ -84,14 +84,14 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
             rootView.findViewById<RecyclerView>(R.id.futureRecyclerView)
 
         val todayAdapter =
-            DailyWeatherAdapter(locationId, true).also {
+            DailyWeatherAdapter(true).also {
                 it.activity = activity
                 it.viewModel = viewModel
                 it.loadIndicator = loadIndicator
             }
 
         val futureAdapter =
-            DailyWeatherAdapter(locationId, false).also {
+            DailyWeatherAdapter(false).also {
                 it.activity = activity
                 it.viewModel = viewModel
                 it.loadIndicator = loadIndicator
