@@ -14,24 +14,6 @@ class WeatherViewModel : BaseViewModel() {
     private val httpRepository = getFromKoin<HttpRepository>()
     private var cachedLocationWeatherList = ArrayList<LocationWeather>()
 
-    fun getWeatherDetail(
-        id: String,
-        tryBlock: () -> Unit,
-        catchBlock: (throwable: Throwable) -> Unit,
-        finallyBlock: () -> Unit
-    ) {
-        launchOnUITryCatch(
-            {
-                tryBlock()
-                //TODO: get DailyWeatherResp detail
-            },
-            {
-                catchBlock(it)
-                error(it)
-            },
-            { finallyBlock() }
-        )
-    }
 
     fun initLocations(locationList: List<String>) {
         for (location in locationList) {
@@ -46,6 +28,45 @@ class WeatherViewModel : BaseViewModel() {
                 )
             )
         }
+    }
+
+
+    fun queryDailyWeather(
+        activity: Activity,
+        loadIndicator: LoadIndicator,
+        locationId: String,
+        onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
+    ) {
+        if (locationId == CURRENT_LOCATION) {
+            LocateUtil.locateWithPermission(activity) {
+                updateLocationName(locationId, it)
+                queryDailyWeather(locationId, loadIndicator, onResult)
+            }
+        } else {
+            queryDailyWeather(locationId, loadIndicator, onResult)
+        }
+    }
+
+    fun getRealTimeWeather(
+        locationId: String,
+        onSuccess: (resp: RealTimeWeatherResp) -> Unit,
+        onFailed: (throwable: Throwable) -> Unit,
+        onFinal: () -> Unit
+    ) {
+        launchOnUITryCatch(
+            {
+                val locationName = getCachedLocationWeatherName(locationId)
+                locationName?.let {
+                    val resp = httpRepository.getRealTimeWeather(it)
+                    onSuccess(resp)
+                }
+            },
+            {
+                onFailed(it)
+                error(it)
+            },
+            { onFinal() }
+        )
     }
 
     private fun queryDailyWeather(
@@ -74,28 +95,6 @@ class WeatherViewModel : BaseViewModel() {
 
     }
 
-    fun getRealTimeWeather(
-        locationId: String,
-        onSuccess: (resp: RealTimeWeatherResp) -> Unit,
-        onFailed: (throwable: Throwable) -> Unit,
-        onFinal: () -> Unit
-    ) {
-        launchOnUITryCatch(
-            {
-                val locationName = getCachedLocationWeatherName(locationId)
-                locationName?.let {
-                    val resp = httpRepository.getRealTimeWeather(it)
-                    onSuccess(resp)
-                }
-            },
-            {
-                onFailed(it)
-                error(it)
-            },
-            { onFinal() }
-        )
-    }
-
     private fun getCachedLocationWeather(locationId: String): LocationWeather? {
         for (cachedLocationWeather in cachedLocationWeatherList) {
             if (cachedLocationWeather.id == locationId) {
@@ -122,20 +121,22 @@ class WeatherViewModel : BaseViewModel() {
         getCachedLocationWeather(locationId)?.locationName = locationName
     }
 
-    fun queryDailyWeather(
-        activity: Activity,
-        loadIndicator: LoadIndicator,
-        locationId: String,
-        onResult: (weatherList: List<DailyWeatherResp.Data>) -> Unit
+    fun getWeatherDetail(
+        id: String,
+        tryBlock: () -> Unit,
+        catchBlock: (throwable: Throwable) -> Unit,
+        finallyBlock: () -> Unit
     ) {
-        if (locationId == CURRENT_LOCATION) {
-            LocateUtil.locateWithPermission(activity) {
-                updateLocationName(locationId, it)
-                queryDailyWeather(locationId, loadIndicator, onResult)
-            }
-        } else {
-            queryDailyWeather(locationId, loadIndicator, onResult)
-        }
-
+        launchOnUITryCatch(
+            {
+                tryBlock()
+                //TODO: get DailyWeatherResp detail
+            },
+            {
+                catchBlock(it)
+                error(it)
+            },
+            { finallyBlock() }
+        )
     }
 }
