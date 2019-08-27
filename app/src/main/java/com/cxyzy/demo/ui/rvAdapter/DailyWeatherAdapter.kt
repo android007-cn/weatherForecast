@@ -3,26 +3,19 @@ package com.cxyzy.demo.ui.rvAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.DailyWeatherResp
-import com.cxyzy.demo.ui.activity.LoadIndicator
 import com.cxyzy.demo.utils.WeatherTypes.CLOUDY
 import com.cxyzy.demo.utils.WeatherTypes.RAINY
 import com.cxyzy.demo.utils.WeatherTypes.SUNNY
-import com.cxyzy.demo.viewmodels.DailyWeatherViewModel
 import kotlinx.android.synthetic.main.item_future_forecast.view.*
 import kotlinx.android.synthetic.main.item_future_forecast.view.dayNameTv
 import kotlinx.android.synthetic.main.item_future_forecast.view.weatherLogoIv
 import kotlinx.android.synthetic.main.item_today_forecast.view.*
 
-class DailyWeatherAdapter(var isToday: Boolean) :
+class DailyWeatherAdapter(private var isToday: Boolean) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var activity: AppCompatActivity
-    lateinit var viewModel: DailyWeatherViewModel
-    lateinit var loadIndicator: LoadIndicator
 
     private lateinit var onItemClick: (resp: DailyWeatherResp.Data) -> Unit
     private var mFutureDataList = mutableListOf<DailyWeatherResp.Data>()
