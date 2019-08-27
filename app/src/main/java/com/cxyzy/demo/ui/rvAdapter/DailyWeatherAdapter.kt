@@ -48,12 +48,17 @@ class DailyWeatherAdapter(private var isToday: Boolean) :
 
 
     fun setData(dataList: List<DailyWeatherResp.Data>) {
+        if (dataList.isEmpty()) {
+            return
+        }
         if (isToday) {
             mTodayDataList.clear()
             mTodayDataList.addAll(dataList[0].hours)
         } else {
             mFutureDataList.clear()
-            mFutureDataList.addAll(dataList)
+            for (i in 1 until dataList.size) {
+                mFutureDataList.add(dataList[i])
+            }
         }
         notifyDataSetChanged()
     }
