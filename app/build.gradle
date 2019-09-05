@@ -53,4 +53,8 @@ dependencies {
     implementation 'com.amap.api:location:latest.integration'
 
     implementation 'com.afollestad:viewpagerdots:1.0.0'
+
+    implementation 'com.github.cxyzy1:sunriseSunset:1.0.0'
+    implementation 'com.github.cxyzy1:circleprogress:1.0.1'
+    implementation 'com.github.cxyzy1:windmill:1.0.0'
 }
