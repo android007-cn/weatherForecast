@@ -16,6 +16,7 @@ android {
     dataBinding {
         enabled = true
     }
+
 }
 
 dependencies {
@@ -54,7 +55,7 @@ dependencies {
 
     implementation 'com.afollestad:viewpagerdots:1.0.0'
 
-    implementation 'com.github.cxyzy1:sunriseSunset:1.0.0'
-    implementation 'com.github.cxyzy1:circleprogress:1.0.1'
-    implementation 'com.github.cxyzy1:windmill:1.0.0'
+    implementation 'com.github.cxyzy1:sunriseSunset:1.0.4'
+    implementation 'com.github.cxyzy1:circleprogress:1.0.4'
+    implementation 'com.github.cxyzy1:windmill:1.0.4'
 }
