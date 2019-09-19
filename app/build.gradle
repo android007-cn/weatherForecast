@@ -51,7 +51,7 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$rootProject.koinVersion"
 
     implementation "com.afollestad:assent:$rootProject.assentVersion"
-    implementation 'com.amap.api:location:latest.integration'
+    implementation 'com.amap.api:location:4.7.0'
 
     implementation 'com.afollestad:viewpagerdots:1.0.0'
 
