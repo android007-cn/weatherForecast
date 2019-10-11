@@ -21,19 +21,19 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <com.cxyzy.demo.ui.view.VpSwipeRefreshLayout
+    <com.cxyzy.weather.ui.view.VpSwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/dotsIndicator"
         android:layout_below="@id/toolbar">
 
-        <com.cxyzy.demo.ui.view.ViewPagerView
+        <com.cxyzy.weather.ui.view.ViewPagerView
             android:id="@+id/viewPagerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.cxyzy.demo.ui.view.VpSwipeRefreshLayout>
+    </com.cxyzy.weather.ui.view.VpSwipeRefreshLayout>
 
     <com.afollestad.viewpagerdots.DotsIndicator
         android:id="@+id/dotsIndicator"

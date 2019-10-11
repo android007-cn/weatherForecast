@@ -21,7 +21,7 @@
             android:visibility="invisible"
             tools:visibility="visible" />
 
-        <com.cxyzy.demo.ui.view.HorizontalRecyclerView
+        <com.cxyzy.weather.ui.view.HorizontalRecyclerView
             android:id="@+id/todayRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

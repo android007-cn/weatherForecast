@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cxyzy.demo">
+    package="com.cxyzy.weather">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -14,7 +14,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
 
-        <activity android:name="com.cxyzy.demo.ui.activity.WeatherActivity">
+        <activity android:name="com.cxyzy.weather.ui.activity.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
