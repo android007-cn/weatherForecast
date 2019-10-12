@@ -55,7 +55,10 @@ dependencies {
 
     implementation 'com.afollestad:viewpagerdots:1.0.0'
 
-    implementation 'com.github.cxyzy1:sunriseSunset:1.0.4'
-    implementation 'com.github.cxyzy1:circleprogress:1.0.4'
+    //风车动画
     implementation 'com.github.cxyzy1:windmill:1.0.4'
+    //圆形进度动画
+    implementation 'com.github.cxyzy1:circleprogress:1.0.4'
+    //日升日落动画
+    implementation 'com.github.cxyzy1:sunriseSunset:1.0.4'
 }
