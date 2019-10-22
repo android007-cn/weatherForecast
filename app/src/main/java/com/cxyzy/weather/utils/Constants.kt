@@ -11,7 +11,8 @@ object ApiToken {
 }
 
 object OkHttpUrl {
-    const val BASE_URL = "https://www.tianqiapi.com/api/"
+    const val BASE_WEATHER_URL = "https://www.tianqiapi.com/api/"
+    const val BASE_CITY_NAME_URL = "https://www.tianqiapi.com/api/"
     const val LOGIN_URL = "user/login"
 }
 
