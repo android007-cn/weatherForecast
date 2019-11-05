@@ -35,14 +35,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
-
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
-
     implementation "org.greenrobot:eventbus:$rootProject.eventBusVersion"
-
     implementation "com.github.cxyzy1:kotlinUtils:$rootProject.kotlinUtilsVersion"
 
     //Koin
@@ -51,10 +48,11 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$rootProject.koinVersion"
 
     implementation "com.afollestad:assent:$rootProject.assentVersion"
+
+    //高德地图
     implementation 'com.amap.api:location:4.7.0'
-
+    //带指示小圆点的viewPager
     implementation 'com.afollestad:viewpagerdots:1.0.0'
-
     //风车动画
     implementation 'com.github.cxyzy1:windmill:1.0.4'
     //圆形进度动画

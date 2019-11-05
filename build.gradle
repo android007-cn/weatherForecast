@@ -31,7 +31,7 @@ buildscript {
         okhttpVersion = '3.9.1'
         loggingInterceptorVersion = '3.11.0'
         koinVersion = '2.0.0-rc-1'
-        kotlinUtilsVersion = '1.0.10'
+        kotlinUtilsVersion = '1.0.11'
         eventBusVersion = '3.1.1'
         assentVersion = '2.3.1'
     }
