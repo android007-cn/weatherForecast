@@ -22,7 +22,7 @@ class WeatherActivity : BaseActivity<WeatherViewModel>(), LoadIndicator {
     override fun layoutId(): Int = R.layout.activity_weather
 
     override fun initData() {
-        viewModel().initLocations(listOf(CURRENT_LOCATION, "北京", "上海"))
+        viewModel().initLocations(listOf(CURRENT_LOCATION))
     }
 
     override fun initViews() {

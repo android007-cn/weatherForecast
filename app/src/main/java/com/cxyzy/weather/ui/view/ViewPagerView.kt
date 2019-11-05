@@ -112,6 +112,8 @@ class ViewPagerView(context: Context, attrs: AttributeSet) : RelativeLayout(cont
         rootView.findViewById<TextView>(R.id.realTimeTemperatureTv).text = resp.tem
         rootView.findViewById<TextView>(R.id.realTimeHighLowTemperatureTv).text =
             "${resp.tem1}℃ / ${resp.tem2}℃"
+        rootView.findViewById<TextView>(R.id.airQualityTv).text =
+            "${resp.airLevel} , ${resp.airPm25}"
         rootView.findViewById<TextView>(R.id.weatherDescTv).text = resp.wea
         rootView.findViewById<TextView>(R.id.locationNameTv).text = resp.city
         rootView.findViewById<TextView>(R.id.realTimeTemperatureTv).text = resp.tem
