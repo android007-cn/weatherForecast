@@ -1,16 +1,14 @@
 package com.cxyzy.weather.ui.activity
 
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.Toolbar
+import com.cxyzy.utils.ext.toast
 import com.cxyzy.weather.R
 import com.cxyzy.weather.network.response.DailyWeatherResp
 import com.cxyzy.weather.ui.LoadIndicator
 import com.cxyzy.weather.utils.CURRENT_LOCATION
 import com.cxyzy.weather.viewmodels.WeatherViewModel
-import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_weather.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
@@ -55,19 +53,6 @@ class WeatherActivity : BaseActivity<WeatherViewModel>(), LoadIndicator {
             {
                 progressBar.visibility = GONE
             })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_scrolling, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_edit_cities -> true
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun showLoading() {
