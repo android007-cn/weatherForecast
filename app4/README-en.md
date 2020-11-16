@@ -6,15 +6,17 @@ A simple weather forecast app.
 3. show at most seven days.
 
 # Screenshot
-![](https://raw.githubusercontent.com/android007-cn/browseBeauty/master/screenshots/screenshot1.gif)
+![](https://raw.githubusercontent.com/android007-cn/weatherForecast/master/screenshot/screenshot.jpg)
 # Key Points
 1. Retrofit+okHttp: fetch data from network
 2. Coroutines: make asynchronous operations
-3. ViewPager2: swipe to change page
-4. Glide: show images
-5. Room: read and write on sqLite database
-6. BottomNavigationView: show bottom navigation
-7. Recyclerview: show list
+3. Glide: show images
+4. Recyclerview: show list
+5. SwipeRefreshLayout: Refresh page
+6. koin: dependency injection
+7. ViewModel
+8. LiveData: make data change notification easy
+
 # License
 Copyright 2020 android007-cn
 
@@ -31,26 +33,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-# 简单天气预报demo
-
-## 功能介绍：
-
-1. 支持定位当前所在城市（集成高德地图）
-2. 支持加载多个城市天气
-3. 支持显示实时天气，当前天气和之后6天天气。
-
-
-## 技术实现介绍：
-
-1. coroutines+retrofit请求网络接口
-2. 通过RecyclerView以列表形式展示数据
-3. 结合SwipeRefreshLayout，支持下拉刷新
-4. 加载多个城市天气： SwipeRefreshLayout内嵌ViewPager，SwipeRefreshLayout实现整体刷新，ViewPager用于展示各个城市天气。
-通过VpSwipeRefreshLayout解决二者滑动冲突问题。
-5. 接口调用时里包含日志拦截器
-6. 支持koin
-7. 支持ViewModel
-8. 支持LiveData
 
 
 
