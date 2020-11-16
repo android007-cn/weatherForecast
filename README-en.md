@@ -6,7 +6,7 @@ A simple weather forecast app.
 3. show at most seven days.
 
 # Screenshot
-![](https://raw.githubusercontent.com/android007-cn/weatherForecast/master/screenshot/screenshot.jpg)
+![](https://raw.githubusercontent.com/android007-cn/weatherForecast/master/screenshot/screenshot_small.jpg)
 # Key Points
 1. Retrofit+okHttp: fetch data from network
 2. Coroutines: make asynchronous operations
