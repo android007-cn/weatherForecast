@@ -14,7 +14,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
 
-        <activity android:name="com.cxyzy.weather.ui.activity.WeatherActivity">
+        <activity android:name=".ui.activity.DailyWeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
