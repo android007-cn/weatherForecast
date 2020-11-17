@@ -13,7 +13,7 @@ A simple weather forecast app.
 3. Glide: show images
 4. Recyclerview: show list
 5. SwipeRefreshLayout: Refresh page
-6. koin: dependency injection
+6. Koin: dependency injection
 7. ViewModel
 8. LiveData: make data change notification easy
 
